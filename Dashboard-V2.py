@@ -61,7 +61,15 @@ def f(t,y):
     
     return np.array([dSdt,dEdt,dIdt,dRdt,dVdt])
 
-t_span=np.array([0,365])
+graph = st.radio("Select number of days",('14 days', '100 days', '365 days'))
+
+if graph == '14 days':
+    t_span=np.array([0,14])
+elif graph == '100 days':
+    t_span=np.array([0,100])
+elif graph == '365 days':
+    t_span=np.array([0,365])
+
 t_eval=np.linspace(t_span[0],t_span[1])
 y0=np.array([S0,E0,I0,R0,V0])
 sol=solve_ivp(f,t_span,y0,method='RK45',t_eval=t_eval)
