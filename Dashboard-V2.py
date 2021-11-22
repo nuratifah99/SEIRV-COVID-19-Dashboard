@@ -61,7 +61,7 @@ def f(t,y):
     
     return np.array([dSdt,dEdt,dIdt,dRdt,dVdt])
 
-graph = st.radio("Select number of days",('14 days', '100 days', '365 days'))
+graph = st.selectbox("Select number of days",('14 days', '100 days', '365 days'))
 
 if graph == '14 days':
     t_span=np.array([0,14])
