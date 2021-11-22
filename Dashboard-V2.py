@@ -75,7 +75,7 @@ y0=np.array([S0,E0,I0,R0,V0])
 sol=solve_ivp(f,t_span,y0,method='RK45',t_eval=t_eval)
 
 # Display plotting
-
+st.markdown("The graph shows the COVID-19 prediction based on SEIRV Model.")
 fig=go.Figure()
 
 fig.add_trace(go.Scatter(x=sol.t, y=sol.y[0],mode='lines', name='Susceptible'))
