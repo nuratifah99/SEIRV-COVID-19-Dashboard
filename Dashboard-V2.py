@@ -87,5 +87,5 @@ fig.add_trace(go.Scatter(x=sol.t, y=sol.y[3],mode='lines',name='Removed'))
 fig.add_trace(go.Scatter(x=sol.t, y=sol.y[4],mode='lines',name='Vaccinated'))
 st.plotly_chart(fig, use_container_width=True)
 
-st.markdown("Remarks: The SEIRV Model used for the dashboard was referred from A susceptible-exposed-infected-recovered-vaccinated (SEIRV) mathematical model of measles in Madagascar paper by Alhamami, H.(2019). Meanwhile, for the range of parameters used, they were estimated based on Singapore’s pandemic preparedness: An overview of the first wave of covid-19 paper by Tan, J., B. (2021)")
+st.markdown("Remarks: The SEIRV Model used for the dashboard was referred from 'A susceptible-exposed-infected-recovered-vaccinated (SEIRV) mathematical model of measles in Madagascar' paper by Alhamami, H.(2019). Meanwhile, for the range of parameters used, they were estimated based on 'Singapore’s pandemic preparedness: An overview of the first wave of covid-19' paper by Tan, J., B. (2021)")
 
