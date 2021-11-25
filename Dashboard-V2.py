@@ -24,7 +24,9 @@ S0=N-E0-I0-R0-V0
 
 # Slider for parameters
 
-lamda=st.sidebar.slider("Recruitment rate of susceptible, λ: ", min_value=0, max_value=int(0.5*S0), step=1)
+# lamda=st.sidebar.slider("Recruitment rate of susceptible, λ: ", min_value=0, max_value=int(0.5*S0), step=1)
+
+lamda=0
 
 mu=st.sidebar.slider("Natural mortality rate, μ: ", min_value=0.0, max_value=0.2, step=0.001)
 
@@ -85,5 +87,6 @@ fig.add_trace(go.Scatter(x=sol.t, y=sol.y[3],mode='lines',name='Removed'))
 fig.add_trace(go.Scatter(x=sol.t, y=sol.y[4],mode='lines',name='Vaccinated'))
 st.plotly_chart(fig, use_container_width=True)
 
-
+st.sidebar.markdown("Remarks: The SEIRV Model used for the dashboard was referred from A susceptible-exposed-infected-recovered-vaccinated
+(SEIRV) mathematical model of measles in Madagascar by Alhamami, H.(2019). Meanwhile,for the range of parameters, they were estimated based on Singapore’s pandemic preparedness: An overview of the first wave of covid-19 paper by Tan, J., B. (2021)")
 
