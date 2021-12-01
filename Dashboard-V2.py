@@ -10,7 +10,7 @@ subscript = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
 
 # Slider for total population
 
-N=st.sidebar.slider("Total Population, N: ", min_value=100000, max_value=10000000,value=500000, step=1)
+N=st.sidebar.slider("Total Population, N: ", min_value=100000, max_value=10000000, step=1)
 
 # Slider for initial conditions
 
