@@ -87,7 +87,7 @@ fig.add_trace(go.Scatter(x=sol.t, y=sol.y[3],mode='lines',name='Removed'))
 fig.add_trace(go.Scatter(x=sol.t, y=sol.y[4],mode='lines',name='Vaccinated'))
 st.plotly_chart(fig, use_container_width=True)
 
-st.markdown("The SEIRV Model and the range of parameters used in the dashboard were referred from;  \n" 
+st.markdown("The SEIRV Model and the range of parameters used in the dashboard were referred from;  \n\n" 
             "   1. Alhamami, H. (2019). ProQuest Dissertations & Theses Global.  \n"
             "   2. Tan, J., B., et al. (2020). International Journal of Environmental Research and Public Health.")
-st.markdown("0169 2021 Nur Atifah Baharuddin & Nurul Farahain Mohammad")
+st.markdown("&#169 2021 Nur Atifah Baharuddin & Nurul Farahain Mohammad")
