@@ -10,11 +10,11 @@ subscript = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
 
 # Slider for total population
 
-N=st.sidebar.slider("Total Population, N: ", min_value=100000, max_value=10000000, step=1)
+N=st.sidebar.slider("Total Population, N: ", min_value=100000, max_value=10000000,value=4219463, step=1)
 
 # Slider for initial conditions
 
-E0=st.sidebar.slider("Initial Exposed Population,  E0: ".translate(subscript), min_value=0, max_value=int(0.5*N), step=1)
+E0=st.sidebar.slider("Initial Exposed Population,  E0: ".translate(subscript), min_value=0, max_value=int(0.5*N),value=686725, step=1)
 
 I0=0
 R0=0
@@ -28,21 +28,21 @@ S0=N-E0-I0-R0-V0
 
 lamda=0
 
-mu=st.sidebar.slider("Natural mortality rate, μ: ", min_value=0.0, max_value=0.2, step=0.001)
+mu=st.sidebar.slider("Natural mortality rate, μ: ", min_value=0.0, max_value=0.2,value=0.10, step=0.001)
 
-delta=st.sidebar.slider("Mortality rate due to COVID-19, δ: ", min_value=0.0, max_value=0.5, step=0.001)
+delta=st.sidebar.slider("Mortality rate due to COVID-19, δ: ", min_value=0.0, max_value=0.5,value=0.15, step=0.001)
 
-sigma=st.sidebar.slider("Progression rate from Exposed (E) to Infected (I), σ: ", min_value=0.0, max_value=0.3, step=0.001)
+sigma=st.sidebar.slider("Progression rate from Exposed (E) to Infected (I), σ: ", min_value=0.0, max_value=0.3,value=0.12, step=0.001)
 
-R0=st.sidebar.slider("R-Naught, R0: ".translate(subscript), min_value=0.5, max_value=4.0, step=0.001)
+R0=st.sidebar.slider("R-Naught, R0: ".translate(subscript), min_value=0.5, max_value=4.0,value=1.9, step=0.001)
 
-eta=st.sidebar.slider("Recovery rate from COVID-19, η: ", min_value=0.1, max_value=0.9, step=0.001)
+eta=st.sidebar.slider("Recovery rate from COVID-19, η: ", min_value=0.1, max_value=0.9,value=0.49, step=0.001)
 
 beta=R0*eta
 
-p=st.sidebar.slider("Vaccination success rate, p: ", min_value=0.1, max_value=0.95, step=0.001)
+p=st.sidebar.slider("Vaccination success rate, p: ", min_value=0.1, max_value=0.95,value=0.56, step=0.001)
 
-alpha=st.sidebar.slider("Vaccination rate, α: ", min_value=0.0, max_value=0.8, step=0.001)
+alpha=st.sidebar.slider("Vaccination rate, α: ", min_value=0.0, max_value=0.8,value=0.36, step=0.001)
 
 
 # SEIRV Model
@@ -88,7 +88,7 @@ fig.add_trace(go.Scatter(x=sol.t, y=sol.y[4],mode='lines',name='Vaccinated'))
 st.plotly_chart(fig, use_container_width=True)
 
 #st.markdown("Note: The SEIRV Model used for the dashboard was referred from 'A susceptible-exposed-infected-recovered-vaccinated (SEIRV) mathematical model of measles in Madagascar' paper by Alhamami(2019). Meanwhile, for the range of parameters used, they were estimated based on 'Singapore’s pandemic preparedness: An overview of the first wave of covid-19' paper by Tan et al.(2021).")
-st.markdown("References:  \n" 
+st.markdown("Notes: The SEIRV Model and the range of parameters used in the dashboard were referred from:  \n" 
             "1. Alhamami, H. (2019). ProQuest Dissertations & Theses Global.  \n"
             "2. Tan, J., B., et al. (2020). International Journal of Environmental Research and Public Health.")
 
