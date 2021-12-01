@@ -89,12 +89,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("The SEIRV Model and the range of parameters used in the dashboard were referred from:  \n\n" 
             "   1. Alhamami, H. (2019). ProQuest Dissertations & Theses Global.  \n"
-            "   2. Tan, J., B., et al. (2020). International Journal of Environmental Research and Public Health.  \n  \n  \n"
-            "&#169 2021 Nur Atifah Baharuddin and Nurul Farahain Mohammad")
+            "   2. Tan, J., B., et al. (2020). International Journal of Environmental Research and Public Health.")
+st.markdown("&#169 2021 Nur Atifah Baharuddin and Nurul Farahain Mohammad")
 
 
-primaryColor="#6eb52f"
-backgroundColor="#f0f0f5"
-secondaryBackgroundColor="#e0e0ef"
-textColor="#262730"
-font="sans serif"
