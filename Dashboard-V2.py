@@ -31,7 +31,7 @@ else:
     active_tab = "Simulation"
 
 if active_tab not in tabs:
-    st.experimental_set_query_params(tab="Simulation")
+    st.experimental_set_query_params(tab="Simulation") 
     active_tab = "Simulation"
 
 li_items = "".join(
