@@ -62,7 +62,7 @@ def f(t,y):
     
     return np.array([dSdt,dEdt,dIdt,dRdt,dVdt])
 
-graph = st.radio("Select number of days",('14 days', '100 days', '365 days'))
+graph = st.selectbox("Select number of days",('14 days', '100 days', '365 days'))
 
 if graph == '14 days':
     t_span=np.array([0,14])
@@ -70,6 +70,7 @@ elif graph == '100 days':
     t_span=np.array([0,100])
 elif graph == '365 days':
     t_span=np.array([0,365])
+
 
 t_eval=np.linspace(t_span[0],t_span[1])
 y0=np.array([S0,E0,I0,R0,V0])
@@ -86,5 +87,11 @@ fig.add_trace(go.Scatter(x=sol.t, y=sol.y[3],mode='lines',name='Removed'))
 fig.add_trace(go.Scatter(x=sol.t, y=sol.y[4],mode='lines',name='Vaccinated'))
 st.plotly_chart(fig, use_container_width=True)
 
-st.balloons()
+st.markdown("<hr/>",unsafe_allow_html=True)
+
+st.markdown("References:  \n\n" 
+        "   1. Alhamami, H. (2019). ProQuest Dissertations & Theses Global.  \n"
+        "   2. Tan, J., B., et al. (2020). International Journal of Environmental Research and Public Health.")
+st.markdown("\n\n"
+            "&#169 2021 Nur Atifah Baharuddin and Nurul Farahain Mohamm
 
