@@ -263,17 +263,17 @@ elif active_tab == "COVID-19 Dashboard":
 
     # Initial parameters value from Annas, S., et al.(2020)
 
-    # lamda = 6.25*10**-3
-    # beta = 0.62*10**-8
-    # sigma = 1/7
-    # alpha = 0.5
-    # mu=6.25*10**-3
+    lamda = 6.25*10**-3
+    beta = 0.62*10**-8
+    sigma = 1/7
+    alpha = 0.5
+    mu=6.25*10**-3
 
-    lamda = 0.02
-    beta = 0.08
-    sigma =0.04
-    alpha = 0.05
-    mu=0.02
+#     lamda = 0.02
+#     beta = 0.08
+#     sigma =0.04
+#     alpha = 0.05
+#     mu=0.02
 
     params = Parameters()
     params.add('lamda', value=lamda, min=0)
