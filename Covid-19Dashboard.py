@@ -271,8 +271,8 @@ elif active_tab == "COVID-19 Dashboard":
 
     lamda = 0.02
     beta = 0.08
-    sigma =0.05
-    alpha = 0.04
+    sigma =0.04
+    alpha = 0.05
     mu=0.02
 
     params = Parameters()
