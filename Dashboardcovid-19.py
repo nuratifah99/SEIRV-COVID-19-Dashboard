@@ -383,7 +383,7 @@ with chart02:
 
 st.markdown("<hr/>",unsafe_allow_html=True)
 
-st.write("Click this [repo](https://github.com/nuratifah99/COVID-19-Dashboard/blob/main/coviddashboard.py) to view full code")
+st.write("Click this [repo](https://github.com/nuratifah99/SEIRV-COVID-19-Dashboard/blob/a6f493019edff27d5aab2088a7c9707c7dec4ce1/Dashboardcovid-19.py) to view full code")
 
 st.markdown("References:  \n\n" 
             "   1. SEIRV Model: Alhamami, H. (2019). ProQuest Dissertations & Theses Global.  \n"
