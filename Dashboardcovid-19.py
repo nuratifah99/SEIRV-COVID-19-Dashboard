@@ -370,7 +370,7 @@ st.write("Click this [repo](https://github.com/nuratifah99/SEIRV-COVID-19-Dashbo
 
 st.markdown("References:  \n\n" 
             "   1. SEIRV Model: Alhamami, H. (2019). ProQuest Dissertations & Theses Global.  \n"
-            "   2. Parameters: Alsayed, A., et al. (2020). International Journal of Environmental Research and Public Health.  \n"
+            "   2. Parameter estimation: Alsayed, A., et al. (2020). International Journal of Environmental Research and Public Health.  \n"
             "   3. Parameter estimation: https://github.com/silpara/simulators/tree/master/compartmental_models   \n"
             "   4. COVIDNOW in Malaysia: https://covidnow.moh.gov.my/   \n"
             "   5. Malaysia's Ministry of Health: https://github.com/MoH-Malaysia/covid19-public/tree/main/epidemic   \n"
