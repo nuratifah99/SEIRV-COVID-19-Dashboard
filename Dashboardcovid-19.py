@@ -200,44 +200,27 @@ elif graph == '30 Days':
     t=covid_data.index
     days=len(t)
     tspan = np.arange(0, days, 1)
-    data=covid_data.values
-    params = initial_params()
-    result_all = main(params, initial_conditions,tspan, data, covid_data, days)
-    result = result_all['rst']
-    params = result_all['prm']
-    fitted_predicted = result_all['fit']
-    MAE = result_all['mae']
-    RMSE = result_all['rmse'] 
-    
+
 elif graph == '100 Days':
     covid_data=covid_data_full.iloc[0:100]
     t=covid_data.index
     days=len(t)
     tspan = np.arange(0, days, 1)
-    data=covid_data.values
-    params = initial_params()
-    result_all = main(params, initial_conditions,tspan, data, covid_data, days)
-    result = result_all['rst']
-    params = result_all['prm']
-    fitted_predicted = result_all['fit']
-    MAE = result_all['mae']
-    RMSE = result_all['rmse']
     
 elif graph == '300 Days':
     covid_data=covid_data_full.iloc[0:300]
     t=covid_data.index
     days=len(t)
-    tspan = np.arange(0, days, 1)
-    data=covid_data.values
-    params = initial_params()
-    result_all = main(params, initial_conditions,tspan, data, covid_data, days)
-    result = result_all['rst']
-    params = result_all['prm']
-    fitted_predicted = result_all['fit']
-    MAE = result_all['mae']
-    RMSE = result_all['rmse'] 
+    tspan = np.arange(0, days, 1) 
 
-
+data=covid_data.values
+params = initial_params()
+result_all = main(params, initial_conditions,tspan, data, covid_data, days)
+result = result_all['rst']
+params = result_all['prm']
+fitted_predicted = result_all['fit']
+MAE = result_all['mae']
+RMSE = result_all['rmse']
 # Plot Observed vs Fitted data
 
 final = data + result.residual.reshape(data.shape)
