@@ -31,7 +31,7 @@ Removed_Death_new_raw_data=pd.read_csv("https://raw.githubusercontent.com/MoH-Ma
 Vaccinated_raw_data=pd.read_csv("https://raw.githubusercontent.com/CITF-Malaysia/citf-public/main/vaccination/vax_malaysia.csv")
 N_Population_raw_data=pd.read_csv("https://raw.githubusercontent.com/MoH-Malaysia/covid19-public/main/static/population.csv")
 
-
+ 
 # Filter data to be used
 
 # Exposed
