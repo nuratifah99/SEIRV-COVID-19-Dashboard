@@ -139,7 +139,7 @@ def rmse(days,fitted_predicted_EIRV,observed_EIRV):
     I_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 1] - observed_EIRV[:days, 1])**2))
     R_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 2] - observed_EIRV[:days, 2])**2))
     V_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 3] - observed_EIRV[:days, 3])**2))
-    return [E_RMSE,I_RMSE,R_RMSE,V_RMSE]
+    return [E_RMSE,I_RMSE,R_RMSE,V_RMSE] 
     
 # Initial Conditions
 
