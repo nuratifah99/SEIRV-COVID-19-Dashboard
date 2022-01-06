@@ -14,7 +14,7 @@ page_title = 'COVID-19 Dashboard',
 page_icon = '✅',
 layout = 'wide'
 )
-
+ 
 title="COVID-19 in Malaysia"
 subtitle="The information and visualization displayed in this website is for Final Year Project (FYP) purposes only"
 st.markdown(f"<h1 style='text-align: center; color: black;'>{title}</h1>", unsafe_allow_html=True)
