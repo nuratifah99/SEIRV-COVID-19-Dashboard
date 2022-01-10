@@ -359,7 +359,7 @@ with chart01:
             tbody th {display:none}
             .blank {display:none}
             </style>
-            """
+            """ 
     st.markdown(hide_table_row_index, unsafe_allow_html=True)
     st.table(PARAMS)
 
