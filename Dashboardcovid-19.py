@@ -65,8 +65,8 @@ df_Removed_Death_new_cases=pd.DataFrame({'Date': pd.to_datetime(Removed_Death_ne
 Removed_Death_new_cases=df_Removed_Death_new_cases[(df_Removed_Death_new_cases['Date'] >= '2021-02-24')]
 Removed_Death=Removed_Death_new_cases.groupby(['Date'], as_index=True).agg('sum')
 
-# Total_Removed=Removed_recovered + Removed_Death
-Total_Removed=Removed_recovered 
+Total_Removed=Removed_recovered + Removed_Death
+# Total_Removed=Removed_recovered 
 
 
 # Vaccinated
