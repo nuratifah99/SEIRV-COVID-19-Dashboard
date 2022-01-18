@@ -272,10 +272,11 @@ fig_model=go.Figure()
 # fig_model.add_trace(go.Scatter(x=t, y=S, mode='lines', name='Susceptible' ))
 fig_model.add_trace(go.Scatter(x=t, y=E, mode='lines', name='Exposed'))
 fig_model.add_trace(go.Scatter(x=t, y=I, mode='lines', name='Infected'))
-fig_model.add_trace(go.Scatter(x=t, y=R, mode='lines',name='Recovered'))
+fig_model.add_trace(go.Scatter(x=t, y=R, mode='lines',name='Removed'))
 fig_model.add_trace(go.Scatter(x=t, y=V, mode='lines', name='Vaccinated'))
 fig_model.update_layout(title='SEIRV Model',xaxis_title='Day',yaxis_title='Population',title_x=0.5,width=700, height=700)
-
+fig.update_layout(legend=dict(x=.85, y=.97,traceorder="normal", font=dict(family="Times New Roman", size=14, color="Black"),))
+fig.update_layout(legend={'itemsizing': 'constant'})
 st.markdown("<hr/>",unsafe_allow_html=True)    
 # First Row
 st.write('**Daily Statistic**')
