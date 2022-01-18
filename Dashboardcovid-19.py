@@ -308,9 +308,9 @@ with kpi3:
     st.markdown(f"<h4 style='text-align: center; color: red;'>{'Confirmed cases'}</h4>", unsafe_allow_html=True)
 
 with kpi4:
-    Recovered = int(R[-1]) 
-    st.markdown(f"<h3 style='text-align: center; color: green;'>{Recovered}</h3>", unsafe_allow_html=True)
-    st.markdown(f"<h4 style='text-align: center; color: green;'>{'Recovered cases'}</h4>", unsafe_allow_html=True)
+    Removed = int(R[-1]) 
+    st.markdown(f"<h3 style='text-align: center; color: green;'>{Removed}</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style='text-align: center; color: green;'>{'Removed cases'}</h4>", unsafe_allow_html=True)
     
 with kpi5:
     Vaccinated = int(V[-1]) 
