@@ -275,7 +275,7 @@ fig_model.add_trace(go.Scatter(x=t, y=I, mode='lines', name='Infected'))
 fig_model.add_trace(go.Scatter(x=t, y=R, mode='lines',name='Removed'))
 fig_model.add_trace(go.Scatter(x=t, y=V, mode='lines', name='Vaccinated'))
 fig_model.update_layout(title='SEIRV Model',xaxis_title='Day',yaxis_title='Population',title_x=0.5,width=700, height=700)
-fig_model.update_layout(legend=dict(x=.8, y=.97,traceorder="normal", font=dict(family="Times New Roman", size=14, color="Black"),))
+fig_model.update_layout(legend=dict(x=.77, y=.97,traceorder="normal", font=dict(family="Times New Roman", size=14, color="Black"),))
 fig_model.update_layout(legend={'itemsizing': 'constant'})
 st.markdown("<hr/>",unsafe_allow_html=True)    
 # First Row
