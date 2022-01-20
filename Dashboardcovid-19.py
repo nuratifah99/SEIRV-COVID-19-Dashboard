@@ -314,7 +314,7 @@ with kpi4:
     st.markdown(f"<h4 style='text-align: center; color: green;'>{'Removed cases'}</h4>", unsafe_allow_html=True)
     
 with kpi5:
-    Vaccinated = int(V[300]) 
+    Vaccinated = int(V[len(t)]) 
     st.markdown(f"<h3 style='text-align: center; color: purple;'>{Vaccinated}</h3>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: center; color: purple;'>{'Vaccinated'}</h4>", unsafe_allow_html=True)
 
