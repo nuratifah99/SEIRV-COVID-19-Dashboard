@@ -262,12 +262,12 @@ I =fitted_predicted[:, 2]
 R =fitted_predicted[:, 3]
 V =fitted_predicted[:, 4]
 
- SEIRV=pd.DataFrame()
- SEIRV['Susceptible']= S
- SEIRV['Exposed']= E
- SEIRV['Infected']= I
- SEIRV['Removed']= R
- SEIRV['Vacinated']= V
+SEIRV=pd.DataFrame()
+SEIRV['Susceptible']= S
+SEIRV['Exposed']= E
+SEIRV['Infected']= I
+SEIRV['Removed']= R
+SEIRV['Vacinated']= V
  
 fig_model=go.Figure()
 # fig_model.add_trace(go.Scatter(x=t, y=S, mode='lines', name='Susceptible' ))
