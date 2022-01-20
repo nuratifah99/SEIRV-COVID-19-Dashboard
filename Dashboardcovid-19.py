@@ -262,6 +262,13 @@ I =fitted_predicted[:, 2]
 R =fitted_predicted[:, 3]
 V =fitted_predicted[:, 4]
 
+ SEIRV=pd.DataFrame()
+ SEIRV['Susceptible']= S
+ SEIRV['Exposed']= E
+ SEIRV['Infected']= I
+ SEIRV['Removed']= R
+ SEIRV['Vacinated']= V
+ 
 fig_model=go.Figure()
 # fig_model.add_trace(go.Scatter(x=t, y=S, mode='lines', name='Susceptible' ))
 fig_model.add_trace(go.Scatter(x=t, y=E, mode='lines', name='Exposed'))
@@ -374,4 +381,4 @@ st.markdown("References:  \n\n"
             "   6. COVID-19 Immunisation Task Force: https://github.com/CITF-Malaysia/citf-public   \n")
  
 st.markdown("\n\n"
-            "&#169 2021 Nur Atifah Baharuddin and Nurul Farahain Mohammad") 
+            "&#169 2022 Nur Atifah Baharuddin and Nurul Farahain Mohammad") 
