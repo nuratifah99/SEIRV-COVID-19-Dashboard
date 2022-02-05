@@ -182,9 +182,9 @@ def main(params, initial_conditions,tspan, data, covid_data, days):
      
 # Dropdown
 graph = st.selectbox("Select number of days",('14 Days', '30 Days','100 Days', '300 Days'))
-# params = initial_params()
+params = initial_params()
 if graph == '14 Days':
-    params = initial_params()
+#     params = initial_params()
     covid_data=covid_data_full.iloc[0:14]
     t=covid_data.index
     days=len(t)
@@ -192,7 +192,7 @@ if graph == '14 Days':
     data=covid_data.values
     
 elif graph == '30 Days':
-    params = initial_params()
+#     params = initial_params()
     covid_data=covid_data_full.iloc[0:30]
     t=covid_data.index
     days=len(t)
@@ -200,7 +200,7 @@ elif graph == '30 Days':
     data=covid_data.values
 
 elif graph == '100 Days':
-    params = initial_params()
+#     params = initial_params()
     covid_data=covid_data_full.iloc[0:100]
     t=covid_data.index
     days=len(t)
@@ -208,7 +208,7 @@ elif graph == '100 Days':
     data=covid_data.values
     
 elif graph == '300 Days':
-    params = initial_params()
+#     params = initial_params()
     covid_data=covid_data_full.iloc[0:300]
     t=covid_data.index
     days=len(t)
