@@ -83,7 +83,7 @@ Total_Vaccinated=Vaccinated_adult + Vaccinated_child
 # Total Population
 N_Population_data=N_Population_raw_data[N_Population_raw_data['state']=='Malaysia']
 
-def ode_model(z, t, lamda, sigma, beta, alpha, mu):
+def ode_model(z, t, lamda, mu, beta, sigma,alpha):
     """
     Reference Alhamami (2019)
     """
@@ -103,27 +103,11 @@ def ode_model(z, t, lamda, sigma, beta, alpha, mu):
     return [dSdt, dEdt, dIdt, dRdt, dVdt]
     
 def ode_solver(t, initial_conditions, params):
-    initE, initI, initR, initN, initV = initial_conditions
-    lamda, sigma, beta, alpha, mu = params['lamda'].value, params['sigma'].value, params['beta'].value, params['alpha'].value, params['mu'].value
-    initS = initN - (initE + initI + initR + initV)
+    initS, initE, initI, initR, initV = initial_conditions
+    lamda, mu, beta, sigma,alpha = params
     t_eval=np.linspace(t[0],t[1],1)
-    res = odeint(ode_model, [initS, initE, initI, initR, initV], t, args=(lamda, sigma, beta, alpha, mu))
+    res = odeint(ode_model, [initS, initE, initI, initR, initV], t, args=(lamda, mu, beta, sigma,alpha))
     return res
-
-def initial_params():
-    lamda = 6.25*10**-3
-    beta = 0.62*10**-8
-    sigma = 1/7
-    alpha = 0.5
-    mu=6.25*10**-3
-
-    params = Parameters()
-    params.add('lamda', value=lamda, min=0)
-    params.add('sigma', value=sigma, min=0,max=10)
-    params.add('beta', value=beta, min=0,max=10)
-    params.add('alpha', value=alpha, min=0,max=10)
-    params.add('mu', value=mu, min=0,max=10)
-    return params
 
 def error(params, initial_conditions, tspan, data):
     sol = ode_solver(tspan, initial_conditions, params)
@@ -142,7 +126,47 @@ def rmse(days,fitted_predicted_EIRV,observed_EIRV):
     R_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 2] - observed_EIRV[:days, 2])**2))
     V_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 3] - observed_EIRV[:days, 3])**2))
     return [E_RMSE,I_RMSE,R_RMSE,V_RMSE] 
+
+def params_14days():
     
+    lamda=1.9114*10**9
+    mu=0.11146021
+    beta=0.16646809
+    sigma=0.64759484
+    alpha=3.9624*10**-9
+    
+    return [lamda, mu, beta, sigma,alpha] 
+
+def params_30days():
+    
+    lamda=69347562.8
+    mu=0.78449434
+    beta=1.04329137
+    sigma=3.27701934
+    alpha=4.8105*10**-5
+    
+    return [lamda, mu, beta, sigma,alpha]
+
+def params_100days():
+    
+    lamda=184.749163
+    mu=0.07321924
+    beta=0.22898702
+    sigma=0.35874324
+    alpha=7.6593*10**-28
+    
+    return [lamda, mu, beta, sigma,alpha]
+
+def params_300days():
+    
+    lamda=46201.0279
+    mu=0.15743701
+    beta=0.30443791
+    sigma=4.49046982
+    alpha=2.5894*10**-4
+    
+    return [lamda, mu, beta, sigma,alpha]
+
 # Initial Conditions
 
 initN =int(N_Population_data['pop'])
@@ -152,21 +176,11 @@ initR =Total_Removed['Removed cases'].iloc[0]
 initV =Total_Vaccinated['Vaccinated'].iloc[0]
 initS = initN - (initE + initI + initR + initV)
 
-initial_conditions = [initE, initI, initR, initN, initV]
+initial_conditions = [initS, initE, initI, initR, initV]
 covid_data_full=pd.concat([Total_Exposed,Total_Infected,Total_Removed,Total_Vaccinated],join='inner',axis=1)
 
 def main(params, initial_conditions,tspan, data, covid_data, days):
-    # PARAMETER ESTIMATION
-
-    result = minimize(error, params, args=(initial_conditions, tspan, data), method='least_squares')
-    params['lamda'].value = result.params['lamda'].value
-    params['sigma'].value = result.params['sigma'].value
-    params['beta'].value = result.params['beta'].value
-    params['alpha'].value = result.params['alpha'].value
-    params['mu'].value = result.params['mu'].value
-        
-    # SOLVE FOR FITTED DATA
-        
+    
     observed_EIRV = covid_data.values
     tspan_fit_pred = np.arange(0, observed_EIRV.shape[0], 1)
     fitted_predicted = ode_solver(tspan_fit_pred, initial_conditions, params)
@@ -177,19 +191,19 @@ def main(params, initial_conditions,tspan, data, covid_data, days):
     MAE= mae(days,fitted_predicted_EIRV,observed_EIRV)
     RMSE = rmse(days,fitted_predicted_EIRV,observed_EIRV)
         
-    return {'rst':result,'prm':params, 'fit':fitted_predicted,'mae': MAE,'rmse': RMSE}
+    return {'prm':params, 'fit':fitted_predicted,'mae': MAE,'rmse': RMSE}
 
      
 # Dropdown
 graph = st.selectbox("Select number of days",('14 Days', '30 Days','100 Days', '300 Days'))
-params = initial_params()
+# params = initial_params()
 if graph == '14 Days':
-#     params = initial_params()
     covid_data=covid_data_full.iloc[0:14]
     t=covid_data.index
     days=len(t)
     tspan = np.arange(0, days, 1)
     data=covid_data.values
+    params=params_14days()
     
 elif graph == '30 Days':
 #     params = initial_params()
@@ -198,6 +212,7 @@ elif graph == '30 Days':
     days=len(t)
     tspan = np.arange(0, days, 1)
     data=covid_data.values
+    params=params_30days()
 
 elif graph == '100 Days':
 #     params = initial_params()
@@ -206,6 +221,7 @@ elif graph == '100 Days':
     days=len(t)
     tspan = np.arange(0, days, 1)
     data=covid_data.values
+    params=params_100days()
     
 elif graph == '300 Days':
 #     params = initial_params()
@@ -214,16 +230,18 @@ elif graph == '300 Days':
     days=len(t)
     tspan = np.arange(0, days, 1) 
     data=covid_data.values
+    params=params_300days()
 
 result_all = main(params, initial_conditions,tspan, data, covid_data, days)
-result = result_all['rst']
-params = result_all['prm']
+# result = result_all['rst']
+# params = result_all['prm']
 fitted_predicted = result_all['fit']
 MAE = result_all['mae']
 RMSE = result_all['rmse']
 # Plot Observed vs Fitted data
 
-final = data + result.residual.reshape(data.shape)
+# final = data + result.residual.reshape(data.shape)
+final=fitted_predicted[:,:]
 
 fig_data_E = go.Figure()
 
@@ -292,11 +310,11 @@ with kpi1:
     delta = 0.016 # from Alsayed paper
     p = 0.5     # Sinovac
     eta = 0.1 # from Alsayed paper
-    lamda = params['lamda'].value
-    sigma = params['sigma'].value
-    beta = params['beta'].value
-    alpha = params['alpha'].value
-    mu = params['mu'].value
+    lamda = params[0]
+    sigma = params[3]
+    beta = params[2]
+    alpha = params[4]
+    mu = params[1]
     R0 = (sigma*(beta*mu*(p+mu)+(1-p)*beta*alpha*mu))/((mu+sigma)*(eta+mu+delta)*(p+mu)*(alpha+mu))
     Rnaught = "{:.2f}".format(R0)
     st.markdown(f"<h3 style='text-align: center; color: blue;'>{Rnaught}</h3>", unsafe_allow_html=True)
@@ -355,7 +373,7 @@ with chart01:
     PARAMS={'Parameter':['λ','σ','β','α','μ','δ','p','η']}
     PARAMS=pd.DataFrame(PARAMS)
     desc=['Recruitment rate of susceptible','Progression rate from Exposed (E) to Infected (I)','COVID-19 Infection rate','Vaccination rate','Natural mortality rate','Mortality rate due to COVID-19','Vaccination success rate','Recovery rate from COVID-19']
-    value=[params['lamda'].value,params['sigma'].value,params['beta'].value,params['alpha'].value,params['mu'].value,0.016,0.5,0.1]
+    value=[params[0],params[3],params[2],params[4],params[1],0.016,0.5,0.1]
     PARAMS['Description']=desc
     PARAMS['Value']=value
         
