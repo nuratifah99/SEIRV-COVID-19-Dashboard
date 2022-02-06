@@ -11,7 +11,7 @@ subscript = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
 
 # Slider for total population
 
-N=st.sidebar.slider("Total Population, N: ", min_value=100000, max_value=10000000, step=1)
+N=st.sidebar.slider("Total Population, N: ", min_value=100000, max_value=10000000,value=5381000, step=1)
 
 # Slider for initial conditions
 
@@ -31,11 +31,11 @@ mu=st.sidebar.slider("Natural mortality rate, μ: ", min_value=0.0, max_value=0.
 
 delta=st.sidebar.slider("Mortality rate due to COVID-19, δ: ", min_value=0.0, max_value=0.5, step=0.001)
 
-sigma=st.sidebar.slider("Progression rate from Exposed (E) to Infected (I), σ: ", min_value=0.0, max_value=0.3, step=0.001)
+sigma=st.sidebar.slider("Progression rate from Exposed (E) to Infected (I), σ: ", min_value=0.0, max_value=0.3,value=0.192, step=0.001)
 
 R0=st.sidebar.slider("R-Naught, R0: ".translate(subscript), min_value=0.5, max_value=4.0, step=0.001)
 
-eta=st.sidebar.slider("Recovery rate from COVID-19, η: ", min_value=0.1, max_value=0.9, step=0.001)
+eta=st.sidebar.slider("Recovery rate from COVID-19, η: ", min_value=0.1, max_value=0.9,value=0.113, step=0.001)
 
 beta=R0*eta
 
