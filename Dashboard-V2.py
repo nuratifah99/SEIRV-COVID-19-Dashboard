@@ -15,7 +15,7 @@ N=st.sidebar.slider("Total Population, N: ", min_value=100000, max_value=1000000
 
 # Slider for initial conditions
 
-E0=st.sidebar.slider("Initial Exposed Population,  E0: ".translate(subscript), min_value=0, max_value=int(0.5*N),value=18, step=1)
+E0=st.sidebar.slider("Initial Exposed Population,  E0: ".translate(subscript), min_value=0, max_value=int(0.5*N),value=613940, step=1)
 
 I0=0
 R0=0
@@ -27,21 +27,21 @@ S0=N-E0-I0-R0-V0
 
 lamda=st.sidebar.slider("Recruitment rate of susceptible, λ: ", min_value=0, max_value=int(0.5*S0), step=1)
 
-mu=st.sidebar.slider("Natural mortality rate, μ: ", min_value=0.0, max_value=0.2, step=0.001)
+mu=st.sidebar.slider("Natural mortality rate, μ: ", min_value=0.0, max_value=0.2,value=0.07, step=0.001)
 
-delta=st.sidebar.slider("Mortality rate due to COVID-19, δ: ", min_value=0.0, max_value=0.5, step=0.001)
+delta=st.sidebar.slider("Mortality rate due to COVID-19, δ: ", min_value=0.0, max_value=0.5,value=0.12, step=0.001)
 
 sigma=st.sidebar.slider("Progression rate from Exposed (E) to Infected (I), σ: ", min_value=0.0, max_value=0.3,value=0.192, step=0.001)
 
-R0=st.sidebar.slider("R-Naught, R0: ".translate(subscript), min_value=0.5, max_value=4.0, step=0.001)
+R0=st.sidebar.slider("R-Naught, R0: ".translate(subscript), min_value=0.5, max_value=4.0,value=0.5, step=0.001)
 
-eta=st.sidebar.slider("Recovery rate from COVID-19, η: ", min_value=0.1, max_value=0.9,value=0.113, step=0.001)
+eta=st.sidebar.slider("Recovery rate from COVID-19, η: ", min_value=0.1, max_value=0.9,value=0.26, step=0.001)
 
 beta=R0*eta
 
-p=st.sidebar.slider("Vaccination success rate, p: ", min_value=0.1, max_value=0.95, step=0.001)
+p=st.sidebar.slider("Vaccination success rate, p: ", min_value=0.1, max_value=0.95,value=0.1, step=0.001)
 
-alpha=st.sidebar.slider("Vaccination rate, α: ", min_value=0.0, max_value=0.8, step=0.001)
+alpha=st.sidebar.slider("Vaccination rate, α: ", min_value=0.0, max_value=0.8,value=0.34, step=0.001)
 
 
 # SEIRV Model
