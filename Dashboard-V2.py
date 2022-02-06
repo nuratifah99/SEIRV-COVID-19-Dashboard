@@ -15,7 +15,7 @@ N=st.sidebar.slider("Total Population, N: ", min_value=100000, max_value=1000000
 
 # Slider for initial conditions
 
-E0=st.sidebar.slider("Initial Exposed Population,  E0: ".translate(subscript), min_value=0, max_value=int(0.5*N), step=1)
+E0=st.sidebar.slider("Initial Exposed Population,  E0: ".translate(subscript), min_value=0, max_value=int(0.5*N),value=18, step=1)
 
 I0=0
 R0=0
