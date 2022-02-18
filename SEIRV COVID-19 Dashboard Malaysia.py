@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 from scipy.integrate import odeint,solve_ivp
 from plotly.subplots import make_subplots 
 from lmfit import minimize, Parameters, report_fit
-
+from scipy.signal import savgol_filter
 
 st.set_page_config(
 page_title = 'COVID-19 Dashboard',
@@ -65,8 +65,8 @@ df_Removed_Death_new_cases=pd.DataFrame({'Date': pd.to_datetime(Removed_Death_ne
 Removed_Death_new_cases=df_Removed_Death_new_cases[(df_Removed_Death_new_cases['Date'] >= '2021-02-24')]
 Removed_Death=Removed_Death_new_cases.groupby(['Date'], as_index=True).agg('sum')
 
-Total_Removed=Removed_recovered + Removed_Death
-# Total_Removed=Removed_recovered 
+# Total_Removed=Removed_recovered + Removed_Death
+Total_Removed=Removed_recovered 
 
 
 # Vaccinated
@@ -129,41 +129,41 @@ def rmse(days,fitted_predicted_EIRV,observed_EIRV):
 
 def params_14days():
     
-    lamda=1.9114*10**9
-    mu=0.11146021
-    beta=0.16646809
-    sigma=0.64759484
-    alpha=3.9624*10**-9
+    lamda = 1139.5771
+    mu = 1.4741*10**-5
+    sigma = 0.5
+    beta=1.1542*10**-14
+    alpha=8.9150*10**-5
     
     return [lamda, mu, beta, sigma,alpha] 
 
 def params_30days():
     
-    lamda=69347562.8
-    mu=0.78449434
-    beta=1.04329137
-    sigma=3.27701934
-    alpha=4.8105*10**-5
+    lamda = 1139.5771
+    mu = 1.4741*10**-5
+    sigma = 0.5
+    beta=4.5227*10**-15
+    alpha=1.5803*10**-5
     
     return [lamda, mu, beta, sigma,alpha]
 
 def params_100days():
     
-    lamda=184.749163
-    mu=0.07321924
-    beta=0.22898702
-    sigma=0.35874324
-    alpha=7.6593*10**-28
+    lamda = 1139.5771
+    mu = 1.4741*10**-5
+    sigma = 0.5
+    beta=3.7661*10**-10
+    alpha=1.1238*10**-6
     
     return [lamda, mu, beta, sigma,alpha]
 
 def params_300days():
     
-    lamda=46201.0279
-    mu=0.15743701
-    beta=0.30443791
-    sigma=4.49046982
-    alpha=2.5894*10**-4
+    lamda = 1139.5771
+    mu = 1.4741*10**-5
+    sigma = 0.5
+    beta=9.3996*10**-13
+    alpha=2.8568*10**-7
     
     return [lamda, mu, beta, sigma,alpha]
 
@@ -316,7 +316,8 @@ with kpi1:
     alpha = params[4]
     mu = params[1]
     R0 = (sigma*(beta*mu*(p+mu)+(1-p)*beta*alpha*mu))/((mu+sigma)*(eta+mu+delta)*(p+mu)*(alpha+mu))
-    Rnaught = "{:.2f}".format(R0)
+#     RO = "{:.2f}".format(R0)
+    Rnaught ="{:.2e}".format(R0)
     st.markdown(f"<h3 style='text-align: center; color: blue;'>{Rnaught}</h3>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: center; color: blue;'>{'R-Naught'}</h4>", unsafe_allow_html=True)
     
