@@ -114,26 +114,26 @@ def error(params, initial_conditions, tspan, data):
     return (sol[:,1:5] - data).ravel()
 
 def mae(days,fitted_predicted_EIRV,observed_EIRV):
-    E_MAE=np.mean(np.abs(fitted_predicted_EIRV[:days, 0] - observed_EIRV[:days, 0]))
+#     E_MAE=np.mean(np.abs(fitted_predicted_EIRV[:days, 0] - observed_EIRV[:days, 0]))
     I_MAE=np.mean(np.abs(fitted_predicted_EIRV[:days, 1] - observed_EIRV[:days, 1]))
-    R_MAE=np.mean(np.abs(fitted_predicted_EIRV[:days, 2] - observed_EIRV[:days, 2]))
+#     R_MAE=np.mean(np.abs(fitted_predicted_EIRV[:days, 2] - observed_EIRV[:days, 2]))
     V_MAE=np.mean(np.abs(fitted_predicted_EIRV[:days, 3] - observed_EIRV[:days, 3]))
-    return [E_MAE,I_MAE,R_MAE,V_MAE]
+    return [I_MAE,V_MAE]
     
 def rmse(days,fitted_predicted_EIRV,observed_EIRV):
-    E_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 0] - observed_EIRV[:days, 0])**2))
+#     E_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 0] - observed_EIRV[:days, 0])**2))
     I_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 1] - observed_EIRV[:days, 1])**2))
-    R_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 2] - observed_EIRV[:days, 2])**2))
+#     R_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 2] - observed_EIRV[:days, 2])**2))
     V_RMSE= np.sqrt(np.mean((fitted_predicted_EIRV[:days, 3] - observed_EIRV[:days, 3])**2))
-    return [E_RMSE,I_RMSE,R_RMSE,V_RMSE] 
+    return [I_RMSE,V_RMSE] 
 
 def params_14days():
     
     lamda = 1139.5771
     mu = 1.4741*10**-5
     sigma = 0.5
-    beta=1.1542*10**-14
-    alpha=8.9150*10**-5
+    beta=0.20869049
+    alpha=0.00118449
     
     return [lamda, mu, beta, sigma,alpha] 
 
@@ -142,8 +142,8 @@ def params_30days():
     lamda = 1139.5771
     mu = 1.4741*10**-5
     sigma = 0.5
-    beta=4.5227*10**-15
-    alpha=1.5803*10**-5
+    beta=0.15695220
+    alpha=0.00113605
     
     return [lamda, mu, beta, sigma,alpha]
 
@@ -152,8 +152,8 @@ def params_100days():
     lamda = 1139.5771
     mu = 1.4741*10**-5
     sigma = 0.5
-    beta=3.7661*10**-10
-    alpha=1.1238*10**-6
+    beta=0.13448695
+    alpha=0.00115632
     
     return [lamda, mu, beta, sigma,alpha]
 
@@ -162,8 +162,8 @@ def params_300days():
     lamda = 1139.5771
     mu = 1.4741*10**-5
     sigma = 0.5
-    beta=9.3996*10**-13
-    alpha=2.8568*10**-7
+    beta=0.13812068
+    alpha=0.00128785
     
     return [lamda, mu, beta, sigma,alpha]
 
@@ -293,9 +293,9 @@ SEIRV['Vacinated']= V
  
 fig_model=go.Figure()
 # fig_model.add_trace(go.Scatter(x=t, y=S, mode='lines', name='Susceptible' ))
-fig_model.add_trace(go.Scatter(x=t, y=E, mode='lines', name='Exposed'))
+# fig_model.add_trace(go.Scatter(x=t, y=E, mode='lines', name='Exposed'))
 fig_model.add_trace(go.Scatter(x=t, y=I, mode='lines', name='Infected'))
-fig_model.add_trace(go.Scatter(x=t, y=R, mode='lines',name='Removed'))
+# fig_model.add_trace(go.Scatter(x=t, y=R, mode='lines',name='Removed'))
 fig_model.add_trace(go.Scatter(x=t, y=V, mode='lines', name='Vaccinated'))
 fig_model.update_layout(title='SEIRV Model',xaxis_title='Day',yaxis_title='Population',title_x=0.5,width=700, height=700)
 fig_model.update_layout(legend=dict(x=.77, y=.97,traceorder="normal", font=dict(family="Times New Roman", size=14, color="Black"),))
@@ -304,7 +304,7 @@ st.markdown("<hr/>",unsafe_allow_html=True)
 # First Row
 st.write('**Daily Statistic**')
 
-kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
+kpi1, kpi2, kpi3 = st.columns(3)
 
 with kpi1:
     delta = 0.016 # from Alsayed paper
@@ -316,27 +316,28 @@ with kpi1:
     alpha = params[4]
     mu = params[1]
     R0 = (sigma*(beta*mu*(p+mu)+(1-p)*beta*alpha*mu))/((mu+sigma)*(eta+mu+delta)*(p+mu)*(alpha+mu))
-#     RO = "{:.2f}".format(R0)
-    Rnaught ="{:.2e}".format(R0)
+#     Rnaught = "{:.3f}".format(R0)
+#     Rnaught ="{:.2e}".format(R0)
+    Rnaught =round(R0,2)
     st.markdown(f"<h3 style='text-align: center; color: blue;'>{Rnaught}</h3>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: center; color: blue;'>{'R-Naught'}</h4>", unsafe_allow_html=True)
     
-with kpi2:
-    Exposed = int(E[-1])
-    st.markdown(f"<h3 style='text-align: center; color: black;'>{Exposed}</h3>", unsafe_allow_html=True)
-    st.markdown(f"<h4 style='text-align: center; color: black;'>{'Exposed cases'}</h4>", unsafe_allow_html=True)
+# with kpi2:
+#     Exposed = int(E[-1])
+#     st.markdown(f"<h3 style='text-align: center; color: black;'>{Exposed}</h3>", unsafe_allow_html=True)
+#     st.markdown(f"<h4 style='text-align: center; color: black;'>{'Exposed cases'}</h4>", unsafe_allow_html=True)
     
-with kpi3:
+with kpi2:
     Infected = int(I[-1])
     st.markdown(f"<h3 style='text-align: center; color: red;'>{Infected}</h3>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: center; color: red;'>{'Confirmed cases'}</h4>", unsafe_allow_html=True)
 
-with kpi4:
-    Removed = int(R[-1]) 
-    st.markdown(f"<h3 style='text-align: center; color: green;'>{Removed}</h3>", unsafe_allow_html=True)
-    st.markdown(f"<h4 style='text-align: center; color: green;'>{'Removed cases'}</h4>", unsafe_allow_html=True)
+# with kpi4:
+#     Removed = int(R[-1]) 
+#     st.markdown(f"<h3 style='text-align: center; color: green;'>{Removed}</h3>", unsafe_allow_html=True)
+#     st.markdown(f"<h4 style='text-align: center; color: green;'>{'Removed cases'}</h4>", unsafe_allow_html=True)
     
-with kpi5:
+with kpi3:
     Vaccinated = int(V[-1]) 
     st.markdown(f"<h3 style='text-align: center; color: purple;'>{Vaccinated}</h3>", unsafe_allow_html=True)
     st.markdown(f"<h4 style='text-align: center; color: purple;'>{'Vaccinated'}</h4>", unsafe_allow_html=True)
@@ -349,11 +350,11 @@ st.write('**Observed data vs Fitted data**')
 chart1, chart2 = st.columns(2)
 
 with chart1:
-    st.plotly_chart(fig_data_E, use_container_width=True)
+#     st.plotly_chart(fig_data_E, use_container_width=True)
     st.plotly_chart(fig_data_I, use_container_width=True)
     
 with chart2:
-    st.plotly_chart(fig_data_R, use_container_width=True)
+#     st.plotly_chart(fig_data_R, use_container_width=True)
     st.plotly_chart(fig_data_V, use_container_width=True)
     
 st.markdown("<hr/>",unsafe_allow_html=True)
@@ -363,7 +364,7 @@ chart01, chart02, = st.columns(2)
 
 with chart01:
     
-    MAE_RMSE = {'Population': ['Exposed','Infected','Removed','Vaccinated']}
+    MAE_RMSE = {'Population': ['Infected','Vaccinated']}
     MAE_RMSE =pd.DataFrame(MAE_RMSE)
     MAE_RMSE['Fitted Mean Absolute Error(MAE)']= MAE
     MAE_RMSE['Fitted Root Mean Square Error(RMSE)']= RMSE
